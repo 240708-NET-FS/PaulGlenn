@@ -1,0 +1,8 @@
+./CatApp/cats
+./CatApp/logs
+./CatApp/bin
+./CatApp/obj
+./CatApp.Tests/bin
+./CatApp.Test/obj
+appsettings.json
+./CatApp/Migrations
