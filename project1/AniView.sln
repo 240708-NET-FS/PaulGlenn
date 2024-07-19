@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AniView", "AniView\AniView.csproj", "{50388392-8D30-4BF1-BC70-7A1974DA7829}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AniView.Tests", "AniView.Tests\AniView.Tests.csproj", "{E61050EA-02EC-434A-83F7-CDC6B84BC4EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50388392-8D30-4BF1-BC70-7A1974DA7829}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50388392-8D30-4BF1-BC70-7A1974DA7829}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50388392-8D30-4BF1-BC70-7A1974DA7829}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50388392-8D30-4BF1-BC70-7A1974DA7829}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E61050EA-02EC-434A-83F7-CDC6B84BC4EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E61050EA-02EC-434A-83F7-CDC6B84BC4EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E61050EA-02EC-434A-83F7-CDC6B84BC4EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E61050EA-02EC-434A-83F7-CDC6B84BC4EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
