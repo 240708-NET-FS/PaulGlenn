@@ -1,3 +1,3 @@
-class AnimeList {
+public class AnimeList {
     public AnimeListAnime[] data; 
 }

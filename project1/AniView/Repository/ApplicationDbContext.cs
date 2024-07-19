@@ -32,9 +32,9 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Show>()
-            .HasOne(c=>c.User)
+            .HasOne(s=>s.User)
             .WithMany(u=>u.Shows)
-            .HasForeignKey(c=>c.UserID);
+            .HasForeignKey(s=>s.UserID);
     }
 
 

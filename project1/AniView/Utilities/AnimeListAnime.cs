@@ -1,11 +1,11 @@
 
-class AnimeListAnime {
+public class AnimeListAnime {
     public string url ; 
     public string title; 
     public string title_english; 
     public bool airing ;
 
-    public int? episodes; 
+    public int episodes= 1; 
 
     private string isAiring() {
         if(this.airing) return "Yes";

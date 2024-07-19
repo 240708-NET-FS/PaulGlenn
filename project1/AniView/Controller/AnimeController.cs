@@ -1,16 +1,23 @@
 using System.Net.Http.Headers;
+using AniView.Entities;
+using AniView.Service;
 using Newtonsoft.Json; 
 
-class AnimeController {
+namespace AniView.Controller; 
+public class AnimeController {
   // tagString will be used for API request 
   private string name = ""  ; 
   // tagArray may be used for storage of the characteristics in the database 
 
 
-  private string _reqName = "" ; 
+  private string _user; 
+  private User _User; 
   private DateTime _reqDate = DateTime.Now; 
 
   private string _prompt = "" ;
+
+  private readonly ShowService _showService; 
+
 
   private static string _baseURL = "https://api.jikan.moe/v4/anime?q=";  
 
@@ -19,24 +26,27 @@ class AnimeController {
     BaseAddress = new Uri(_baseURL)
   }; 
 
-  public AnimeController(string name ) 
+  public AnimeController(User user, ShowService service ) 
   {  
-    this._reqName = name; 
+    _User = user; 
+    _user = _User.UserName ; 
+    _showService = service; 
+
     BuildPrompt() ; 
   }
 
  
 
   private void BuildPrompt() {
-    string capitalizedName = string.Concat(this._reqName[0].ToString().ToUpper(), this._reqName.AsSpan(1));
-    this._prompt += $"Hello {capitalizedName}! Welcome to AniView, the anime watch tracker app!\n";  
-    this._prompt += "Enter the name of an anime you want to add to your list: " ;
+    string capitalizedName = string.Concat(_user[0].ToString().ToUpper(), _user.AsSpan(1));
+    _prompt += $"Hello {capitalizedName}! Welcome to AniView, the anime watch tracker app!\n";  
+    _prompt += "Enter the name of an anime you want to add to your list: " ;
 
   }
 
   public bool Prompt() 
   {
-    Console.WriteLine(this._prompt);
+    Console.WriteLine(_prompt);
 
     string name =  Console.ReadLine() ?? "";
 
@@ -52,12 +62,12 @@ class AnimeController {
 
   private string FormatDateTime() {
     string dateTimeString = "" ;
-    dateTimeString += this._reqDate.Year + "-";  
-    dateTimeString += this._reqDate.Month + "-";
-    dateTimeString += this._reqDate.Day + "_";
-    dateTimeString += this._reqDate.Hour + ":";
-    dateTimeString += this._reqDate.Minute + ":";
-    dateTimeString += this._reqDate.Second;
+    dateTimeString += _reqDate.Year + "-";  
+    dateTimeString += _reqDate.Month + "-";
+    dateTimeString += _reqDate.Day + "_";
+    dateTimeString += _reqDate.Hour + ":";
+    dateTimeString += _reqDate.Minute + ":";
+    dateTimeString += _reqDate.Second;
    
    return dateTimeString;  
   }
@@ -66,10 +76,10 @@ class AnimeController {
   async public Task GetAnime() 
   {
     
-    System.Console.WriteLine($" Name: {this.name} \n");
+    System.Console.WriteLine($" Name: {name} \n");
     System.Console.WriteLine($" Retreiving Anime ... ");
     // record precise time API call was made 
-    this._reqDate = DateTime.Now; 
+    _reqDate = DateTime.Now; 
 
     string completeURL = _baseURL + $"{name}&sfw"; 
     using HttpResponseMessage response = await s_client.GetAsync(completeURL); 
@@ -98,7 +108,7 @@ class AnimeController {
         System.Console.WriteLine($"Your choice: {anime.ToString()}");
 
         // next: add this to DB 
-
+        _showService.Create(_User,anime);
 
     } catch (HttpRequestException e) {
       System.Console.WriteLine("Couldn't find anything! Try another anime name 😅");
