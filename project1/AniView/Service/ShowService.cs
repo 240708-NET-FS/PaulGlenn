@@ -15,7 +15,11 @@ public class ShowService(ShowDAO showDAO)
 
     public ICollection<Show> GetAll()
     {
-        return _showDAO.GetAll() ; 
+       return _showDAO.GetAll() ;
+    }
+
+    public List<Show> GetAllByUserName(string userName) {
+        return _showDAO.GetAllByUserName(userName);
     }
 
     public void Create(User user, AnimeListAnime anime)
@@ -35,11 +39,11 @@ public class ShowService(ShowDAO showDAO)
 
     public void Delete(Show item)
     {
-
+        _showDAO.Delete(item); 
     }
 
     public void Update(Show item)
     {
-
+        _showDAO.Update(item);
     }
 }

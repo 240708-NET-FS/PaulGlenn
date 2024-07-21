@@ -14,11 +14,11 @@ public class Show {
 
     public bool isAiring {get; set; }
 
-
-
     public DateTime DateLastWatched {get; set; }
 
     public bool Favorite {get;set; }
 
-     public User User {get; set; }
+    public User User {get; set; }
+
+
 }

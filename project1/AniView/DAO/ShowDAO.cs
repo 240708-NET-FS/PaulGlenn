@@ -1,4 +1,5 @@
-using AniView.Entities; 
+using AniView.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace AniView.DAO; 
 public class ShowDAO(ApplicationDbContext context) : IDAO<Show> {
@@ -12,22 +13,37 @@ public class ShowDAO(ApplicationDbContext context) : IDAO<Show> {
 
     public ICollection<Show> GetAll() 
     {
-        return null; 
+        List<Show> shows =   _context.Shows.ToList(); 
+        return shows; 
     }
 
     public Show GetById(int ID) 
     {
-        return null ; 
+        return _context.Shows.FirstOrDefault(s=>s.ShowID == ID) ; 
+    }
+
+    public List<Show> GetAllByUserName(string userName) {
+        List<Show> shows = [.. _context.Shows.Where(s=>s.User.UserName == userName)]; 
+        return shows ;
     }
 
     public void Update(Show show)
     {
-        
+
+        Show originalShow = GetById(show.ShowID); 
+        originalShow.LastEpisodeWatched = show.LastEpisodeWatched; 
+        originalShow.DateLastWatched = show.DateLastWatched; 
+        originalShow.Favorite = show.Favorite; 
+
+        _context.Shows.Update(originalShow); 
+        _context.SaveChanges();
+
     }
 
-    public void Delete( Show show)
+    public void Delete(Show show)
     {
-
+        _context.Shows.Remove(show); 
+        _context.SaveChanges() ;
     }
 
 }
