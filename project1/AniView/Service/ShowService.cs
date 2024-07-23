@@ -1,5 +1,7 @@
 using AniView.DAO; 
 using AniView.Entities;
+using AniView.Utilities;
+using Microsoft.EntityFrameworkCore.Storage;
 
 
 namespace AniView.Service; 
@@ -13,28 +15,32 @@ public class ShowService(ShowDAO showDAO)
         return _showDAO.GetById(Id) ; 
     }
 
-    public ICollection<Show> GetAll()
+    public List<Show> GetAll()
     {
-       return _showDAO.GetAll() ;
+       List<Show> showList = (List<Show>) _showDAO.GetAll() ;
+       return showList; 
     }
 
     public List<Show> GetAllByUserName(string userName) {
         return _showDAO.GetAllByUserName(userName);
     }
 
-    public void Create(User user, AnimeListAnime anime)
+    public bool Create(User user, Anime anime)
     {
         // user should provide date last watched and last episode watched 
         // for now let's just have them provide the last episode watched. 
 
+        Show? existingShow  = _showDAO.GetByName(anime.title_english);
+        if(existingShow != null) return false ; 
         System.Console.WriteLine($"What is the last episdoe you watched (enter 0 for none, out of {anime.episodes}): ");
         string lastEpisodeWatchedString = Console.ReadLine() ?? "0";
         int lastEpisodeWatched = Int32.Parse(lastEpisodeWatchedString);
 
         // 
-        Show show  = new Show() {Name= anime.title_english, DateLastWatched= DateTime.Now, Episodes=anime.episodes,isAiring = anime.airing, LastEpisodeWatched=lastEpisodeWatched, Favorite=false , UserID = 1  }; 
+        Show show  = new() {Name= anime.title_english, DateLastWatched= DateTime.Now, Episodes=anime.episodes,isAiring = anime.airing, LastEpisodeWatched=lastEpisodeWatched, Favorite=false , UserID = 1  }; 
 
         _showDAO.Create(show); 
+        return true; 
     }
 
     public void Delete(Show item)
@@ -46,4 +52,21 @@ public class ShowService(ShowDAO showDAO)
     {
         _showDAO.Update(item);
     }
+
+    public bool ChangeFavoriteStatus(Show item) {
+        item.Favorite = !item.Favorite; 
+        _showDAO.Update(item);
+        return item.Favorite; 
+    }
+
+    public bool ChangeLastWatched(Show item, int episode) {
+          if ( episode >= 0 && episode <= item.Episodes) {
+          item.DateLastWatched = DateTime.Now; 
+          item.LastEpisodeWatched = episode ; 
+          _showDAO.Update(item); 
+          return true; 
+        }
+        return false; 
+    }
+
 }

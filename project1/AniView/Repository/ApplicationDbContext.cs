@@ -13,9 +13,10 @@ public class ApplicationDbContext : DbContext
 
    }
 
-    public DbSet<Show> Shows {get;set; }
+    // we create the table names as virtual so that Moq can override 
+    public virtual DbSet<Show> Shows {get;set; }
 
-    public DbSet<User> Users {get;set; }
+    public virtual DbSet<User> Users {get;set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -23,8 +24,8 @@ public class ApplicationDbContext : DbContext
             IConfiguration configuration = new ConfigurationBuilder()
                                                 .SetBasePath(Directory.GetCurrentDirectory())
                                                 .AddJsonFile("appsettings.json")
-                                                .Build() ; 
-            var connectionString = configuration.GetConnectionString("DefaultConnection"); 
+                                                .Build() ;
+            string? connectionString = configuration.GetConnectionString("DefaultConnection"); 
             optionsBuilder.UseSqlServer(connectionString); 
         }
     }

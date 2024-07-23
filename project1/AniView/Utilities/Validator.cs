@@ -1,8 +1,10 @@
 using System.Text.RegularExpressions; 
-class Validator {
+namespace AniView.Utilities;
+
+public partial class Validator {
     Validator() {} 
 
-    public static bool InputIsNotEmpty(string str) {
+    public static bool CheckInputIsNotEmpty(string str) {
         if (str == "" ) return false ; 
         return true ;
     }
@@ -11,11 +13,15 @@ class Validator {
     // NameIsValid: if 
     // 1. string is not empty and 
     // 2. does not start with a number 
-    public static bool NameIsValid(string str) {
-        if ( !InputIsNotEmpty(str)) return false; 
+    public static bool CheckNameIsValid(string str) {
+        if ( !CheckInputIsNotEmpty(str)) return false; 
 
-        Match match = Regex.Match(str,@"^[0-9]");
+        Match match = MyRegex().Match(str);
         if( match.Length > 0) return false; 
         return true; 
     }
+
+
+    [GeneratedRegex(@"^[0-9]")]
+    private static partial Regex MyRegex();
 }

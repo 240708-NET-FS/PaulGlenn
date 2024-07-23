@@ -2,6 +2,7 @@
 using AniView.Controller;
 using AniView.DAO;
 using AniView.Service;
+using AniView.Utilities; 
 //using Microsoft.EntityFrameworkCore;
 //using Microsoft.IdentityModel.Tokens;
 
@@ -11,12 +12,11 @@ public class AniView
     static void Main(string[] args) 
     {
 
-
         // get user name 
         string name = "" ; 
         System.Console.WriteLine("Hello! What is your name?");
         name = Console.ReadLine() ?? "" ; 
-        while(!Validator.NameIsValid(name)){
+        while(!Validator.CheckNameIsValid(name)){
             System.Console.WriteLine("That name is invalid. Try again (we will save this with your cats!)");
             System.Console.WriteLine("Enter your name: ");
             name = Console.ReadLine()  ?? "" ; 
@@ -41,7 +41,8 @@ public class AniView
             {
                 showController.Prompt(); 
                 System.Console.WriteLine("Would you like to continue using the app?");
-                if(Console.ReadLine().ToLower() != "yes") continuity = false; 
+                string response = Console.ReadLine() ?? "no"; 
+                if(!response.Equals("yes")) continuity = false; 
             }
                 
 

@@ -22,6 +22,10 @@ public class ShowDAO(ApplicationDbContext context) : IDAO<Show> {
         return _context.Shows.FirstOrDefault(s=>s.ShowID == ID) ; 
     }
 
+    public Show? GetByName(string name) {
+        return _context.Shows.FirstOrDefault(s=>s.Name == name, null);
+    }
+
     public List<Show> GetAllByUserName(string userName) {
         List<Show> shows = [.. _context.Shows.Where(s=>s.User.UserName == userName)]; 
         return shows ;
