@@ -12,6 +12,11 @@ public class UserService (UserDAO userDAO) : IService<User> {
     {
         return _userDAO.GetById(ID); 
     }
+    
+    public User GetByName(string name) 
+    {
+        return _userDAO.GetByName(name);
+    }
 
     public ICollection<User> GetAll()
     {
@@ -22,12 +27,8 @@ public class UserService (UserDAO userDAO) : IService<User> {
     {
         // check that username and password --- ? 
         // check that username doesn't already exist 
-        if ( GetById(item.UserID ) != null ) {
-            // either raise an exception or something 
-            return ; 
-        }
-
-        // 
+        
+        _userDAO.Create(item); 
     }
 
     public void Delete(User item)

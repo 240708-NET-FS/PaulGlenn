@@ -39,7 +39,17 @@ public class ShowController
     Console.WriteLine("We hope you'll come again. 🫡");
  }
 
-  public void Prompt() {
+  public void RunShowApp() {
+       bool continuity = true; 
+            while(continuity) 
+            {
+                RunShowAppUI(); 
+                System.Console.WriteLine("Would you like to continue using the app?");
+                string response = Console.ReadLine() ?? "no"; 
+                if(!response.Equals("yes")) continuity = false; 
+            }
+  }
+  public void RunShowAppUI() {
     string capitalizedName = string.Concat(_userName[0].ToString().ToUpper(), _userName.AsSpan(1));
     string prompt = ""; 
     prompt += $"Hello {capitalizedName}! Welcome to AniView, the anime watch tracker app!\n";  
@@ -97,6 +107,7 @@ public class ShowController
 
   }
 
+// handles user input for adding a new show 
   async public Task AddNewShow(string name) 
   {
 
@@ -170,7 +181,7 @@ public class ShowController
   {
     // will prompt the user to make show edits. able to call Delete() and Update() 
     // the user will enter the ID of the anime they want to edit / delete 
-    Console.WriteLine("Enter the number of the show you would like to edit from the list above.");
+    Console.WriteLine("Enter the number (from above) of the show you would like to edit from the list above.");
     int showChoice  = inputRetriever.GetChoice(); 
 
     // we will get show by ID 

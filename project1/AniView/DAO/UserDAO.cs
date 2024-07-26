@@ -2,7 +2,7 @@ using AniView.Entities;
 
 namespace AniView.DAO; 
 
-public class UserDAO (ApplicationDbContext context ) {
+public class UserDAO (ApplicationDbContext context ) : IDAO<User> {
 
     private readonly ApplicationDbContext _context  = context; 
 
@@ -11,7 +11,8 @@ public class UserDAO (ApplicationDbContext context ) {
     // Create
     public void Create(User item)
     {
-        
+      _context.Users.Add(item);
+       _context.SaveChanges();  
     }
 
     // Read
@@ -22,6 +23,10 @@ public class UserDAO (ApplicationDbContext context ) {
         return user;
     }
 
+    public User GetByName(string name) {
+        User user =  _context.Users.FirstOrDefault(u=>u.UserName == name); 
+        return user ;
+    }
     public ICollection<User> GetAll()
     {
         return null ; 

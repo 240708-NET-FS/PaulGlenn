@@ -13,7 +13,7 @@ public class ShowDAO(ApplicationDbContext context) : IDAO<Show> {
 
     public ICollection<Show> GetAll() 
     {
-        List<Show> shows =   _context.Shows.ToList(); 
+        List<Show> shows = [.. _context.Shows]; 
         return shows; 
     }
 
@@ -22,8 +22,8 @@ public class ShowDAO(ApplicationDbContext context) : IDAO<Show> {
         return _context.Shows.FirstOrDefault(s=>s.ShowID == ID) ; 
     }
 
-    public Show? GetByName(string name) {
-        return _context.Shows.FirstOrDefault(s=>s.Name == name, null);
+    public Show GetByName(User user, string showName) {
+        return _context.Shows.FirstOrDefault(s=>(s.Name == showName && s.UserID == user.UserID));
     }
 
     public List<Show> GetAllByUserName(string userName) {

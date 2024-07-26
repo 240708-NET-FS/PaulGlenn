@@ -10,6 +10,7 @@ public interface IDAO<T>
     // Read
     public T GetById(int ID);
 
+
     public ICollection<T> GetAll();
 
     // Update

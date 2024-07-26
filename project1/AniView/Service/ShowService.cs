@@ -30,14 +30,18 @@ public class ShowService(ShowDAO showDAO)
         // user should provide date last watched and last episode watched 
         // for now let's just have them provide the last episode watched. 
 
-        Show? existingShow  = _showDAO.GetByName(anime.title_english);
-        if(existingShow != null) return false ; 
+        Show? existingShow  = _showDAO.GetByName( user, anime.title_english);
+        if(existingShow != null) 
+        {
+            System.Console.WriteLine("You've already added this show!");
+            return false ; 
+        }
         System.Console.WriteLine($"What is the last episdoe you watched (enter 0 for none, out of {anime.episodes}): ");
         string lastEpisodeWatchedString = Console.ReadLine() ?? "0";
         int lastEpisodeWatched = Int32.Parse(lastEpisodeWatchedString);
 
         // 
-        Show show  = new() {Name= anime.title_english, DateLastWatched= DateTime.Now, Episodes=anime.episodes,isAiring = anime.airing, LastEpisodeWatched=lastEpisodeWatched, Favorite=false , UserID = 1  }; 
+        Show show  = new() {Name= anime.title_english, DateLastWatched= DateTime.Now, Episodes=anime.episodes,isAiring = anime.airing, LastEpisodeWatched=lastEpisodeWatched, Favorite=false , UserID = user.UserID  }; 
 
         _showDAO.Create(show); 
         return true; 

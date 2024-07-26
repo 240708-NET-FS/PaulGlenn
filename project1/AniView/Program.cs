@@ -13,15 +13,15 @@ public class AniView
     {
 
         // get user name 
-        string name = "" ; 
-        System.Console.WriteLine("Hello! What is your name?");
-        name = Console.ReadLine() ?? "" ; 
-        while(!Validator.CheckNameIsValid(name)){
-            System.Console.WriteLine("That name is invalid. Try again (we will save this with your cats!)");
-            System.Console.WriteLine("Enter your name: ");
-            name = Console.ReadLine()  ?? "" ; 
+      
+        // System.Console.WriteLine("Hello! What is your name?");
+        // string name = Console.ReadLine() ?? "" ; 
+        // while(!Validator.CheckNameIsValid(name)){
+        //     System.Console.WriteLine("That name is invalid. Try again (we will save this with your cats!)");
+        //     System.Console.WriteLine("Enter your name: ");
+        //     name = Console.ReadLine()  ?? "" ; 
 
-        }
+        // }
 
         // this concludes the functionality for retrieving one cat. todo next week : add to favorites list which we can store in a database 
         using (var context = new ApplicationDbContext()) 
@@ -29,21 +29,18 @@ public class AniView
             // get user 
             UserDAO userDAO = new(context); 
             UserService userService = new(userDAO); 
-            User user = userService.GetById(1);
+            UserController userController = new UserController(userService); 
+            userController.RunUserUI(); 
+            User user = userController.GetUser();
 
+            // run show app with user 
+        
             ShowDAO showDAO = new(context); 
             ShowService showService = new(showDAO); 
 
             ShowController showController = new(user,showService) ; 
 
-            bool continuity = true; 
-            while(continuity) 
-            {
-                showController.Prompt(); 
-                System.Console.WriteLine("Would you like to continue using the app?");
-                string response = Console.ReadLine() ?? "no"; 
-                if(!response.Equals("yes")) continuity = false; 
-            }
+            showController.RunShowApp();
                 
 
         }

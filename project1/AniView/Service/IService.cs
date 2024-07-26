@@ -4,6 +4,7 @@ public interface IService <T>
 {
     // CRUD
     public T GetById(int Id);
+    
 
     public ICollection<T> GetAll();
 
