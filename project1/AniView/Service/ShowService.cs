@@ -29,7 +29,7 @@ public class ShowService(ShowDAO showDAO)
     {
         // user should provide date last watched and last episode watched 
         // for now let's just have them provide the last episode watched. 
-
+    
         Show? existingShow  = _showDAO.GetByName( user, anime.title_english);
         if(existingShow != null) 
         {

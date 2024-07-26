@@ -17,7 +17,7 @@ public class ShowController
 
   private readonly ShowService _showService; 
 
-  private readonly InputRetriever inputRetriever = new() ; 
+
   private static readonly string _baseURL = "https://api.jikan.moe/v4/anime?q=";  
 
   private static readonly HttpClient s_client = new() 
@@ -25,9 +25,7 @@ public class ShowController
     BaseAddress = new Uri(_baseURL)
   }; 
 
-  public ShowController() {
-    _userName = "testUser" ; 
-  } 
+ 
   public ShowController(User user, ShowService service ) 
   {  
     _User = user; 
@@ -81,7 +79,7 @@ public class ShowController
   {
     Console.WriteLine("Enter the name of an anime you want to add to your list: ");
 
-    string name =  inputRetriever.GetName();
+    string name =  InputRetriever.GetName();
 
     if (!Validator.CheckInputIsNotEmpty(name)) {
 
@@ -131,7 +129,7 @@ public class ShowController
       case "yes": 
         // now have them select anime from list 
         Console.WriteLine("Which one would you like to track? Enter the number");
-        int choice = inputRetriever.GetChoice() - 1 ;//array indexing  
+        int choice = InputRetriever.GetChoice() - 1 ;//array indexing  
 
         Anime anime = animeList[choice];
         Console.WriteLine($"Your choice: {anime.ToString()}");
@@ -183,7 +181,7 @@ public class ShowController
     // will prompt the user to make show edits. able to call Delete() and Update() 
     // the user will enter the ID of the anime they want to edit / delete 
     Console.WriteLine("Enter the number (from above) of the show you would like to edit from the list above.");
-    int showChoice  = inputRetriever.GetChoice(); 
+    int showChoice  = InputRetriever.GetChoice(); 
 
     // we will get show by ID 
     Show show = _showService.GetById(showChoice); 
@@ -196,12 +194,12 @@ public class ShowController
     Console.WriteLine("2. Mark/unmark show as a favorite");
     Console.WriteLine("3. Delete Show");
 
-    int editChoice = inputRetriever.GetChoice() ; 
+    int editChoice = InputRetriever.GetChoice() ; 
     switch(editChoice) {
       case 1: 
      
         System.Console.WriteLine($"Enter a number from 0(unwatched) to {show.Episodes}: ");
-        int episode =  inputRetriever.GetChoice() ; 
+        int episode =  InputRetriever.GetChoice() ; 
         bool success = _showService.ChangeLastWatched(show,episode); 
         if (success) Console.WriteLine($"Show {show.Name} had its last episode watched set to {episode} out of {show.Episodes} 🫡");
         else System.Console.WriteLine("Entered episode is outside the available range");

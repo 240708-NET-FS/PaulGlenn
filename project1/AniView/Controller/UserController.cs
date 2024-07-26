@@ -8,40 +8,67 @@ namespace AniView.Controller;
 public class UserController(UserService service)
 {
     private readonly UserService _userService = service;
-    private string _name ; 
-    private User User;
+    private string _name = "" ; 
+    private User? User;
 
-    public User GetUser() {
+    public User? GetUser() {
         return User; 
     }
 
-    public void RunUserUI() {
-        System.Console.WriteLine("Hello! What is your name?");
-        string name = Console.ReadLine() ?? "" ; 
-        while(!Validator.CheckNameIsValid(name)){
-            System.Console.WriteLine("That name is invalid. Try again (we will save this with your cats!)");
-            System.Console.WriteLine("Enter your name: ");
-            name = Console.ReadLine()  ?? "" ; 
+    public User RunUserUI() {
+
+        bool isLoggedIn = false; 
+
+        while (!isLoggedIn)
+        {
+             System.Console.WriteLine("Hello! Enter a username:");
+            _name = InputRetriever.GetName();
+
+            User = GetExistingUser(); 
+            if ( User == null ) 
+            {
+                isLoggedIn = AddNewUser() ; 
+            }
+            else 
+            {
+                isLoggedIn = LoginUser(); 
+            }
         }
-        _name = name ; 
+        User=GetExistingUser();
 
-        User = GetExistingUser(); 
-
-        User ??= AddNewUser(); 
-
-        // if user == null 
-        // add new user 
-
+        return User; 
+        
 
     }
+
     private User GetExistingUser() {
         return  _userService.GetByName(_name);
     }
 
-    private User AddNewUser(){
-        //System.Console.WriteLine("What password would you like to prote");
-        _userService.Create(new(){UserName=_name,Passphrase="password"}); 
-       return GetExistingUser();
+    private bool LoginUser() {
+
+        bool exitLoginLoop = false; 
+        while(!exitLoginLoop)
+        {
+            System.Console.WriteLine("Enter password: ");
+            string password = Console.ReadLine() ?? "" ; 
+            User unauthUser=  new() {UserName=_name, Passphrase=password};
+            if(_userService.Authenticate(unauthUser)) return true;
+            else {
+                Console.WriteLine("That username or password was incorrect. Enter 1 to try again or anything else to sign up instead. ");
+                int choice = InputRetriever.GetChoice();
+                if ( choice != 1) exitLoginLoop= true ; 
+
+            }
+        }
+        return false; 
+        
+       
+    }
+    private bool AddNewUser(){
+        string password = InputRetriever.GetPassword(); 
+        _userService.Create(new(){UserName=_name,Passphrase=password}); 
+       return true; 
 
     }
     

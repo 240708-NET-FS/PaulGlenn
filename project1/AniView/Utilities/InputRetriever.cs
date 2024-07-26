@@ -1,10 +1,18 @@
 namespace AniView.Utilities; 
 public class InputRetriever {
-    public virtual string GetName() {
-        return Console.ReadLine() ?? ""; 
+    public static string GetName() {
+      bool isValid = false; 
+      string name = "" ; 
+      while(!isValid) {
+        System.Console.WriteLine("Enter username:");
+        name = Console.ReadLine() ?? "" ; 
+        isValid  = Validator.CheckNameIsValid(name); 
+        if(!isValid) System.Console.WriteLine("Invalid username! Can't start with a number. Try again.");
+      }
+      return name; 
     }
 
-    public virtual int GetChoice() 
+    public static int GetChoice() 
     {
 
     var choiceIsValid = int.TryParse(Console.ReadLine(), out int num);
@@ -18,6 +26,18 @@ public class InputRetriever {
     return num; 
 
 
+    }
+
+    public static string GetPassword(){
+      bool isValid = false ; 
+      string password=""; 
+      while(!isValid) {
+        System.Console.WriteLine("Enter a new password: ");
+        password = Console.ReadLine();
+        isValid= Validator.CheckInputIsNotEmpty(password); 
+        if (!isValid) System.Console.WriteLine("You didn't enter anything! Try again. ");
+      }
+      return password;
     }
 
     public static string FormatDateTime(DateTime dateTime) 
