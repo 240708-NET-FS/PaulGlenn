@@ -35,7 +35,11 @@ public class UserDAO (ApplicationDbContext context ) : IDAO<User> {
     // Update
     public void Update(User newItem)
     {
-
+        User user =  GetById(newItem.UserID); 
+        user.UserName = newItem.UserName; 
+        user.Passphrase = newItem.Passphrase; 
+        _context.Users.Update(user); 
+        _context.SaveChanges();
     }
 
     // Delete

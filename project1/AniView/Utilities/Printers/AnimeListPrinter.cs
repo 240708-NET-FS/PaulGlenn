@@ -1,4 +1,4 @@
-using AniView.Utilities; 
+namespace AniView.Utilities.Printers; 
 public class AnimeListPrinter : IPrinter<Anime[]> {
 
     public static void Print(Anime[] animeList) {

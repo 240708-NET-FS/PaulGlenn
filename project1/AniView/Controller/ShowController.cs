@@ -2,7 +2,8 @@
 using AniView.Entities;
 using AniView.Service;
 using AniView.Utilities;
-using Newtonsoft.Json; 
+using AniView.Utilities.Printers; 
+
 
 namespace AniView.Controller; 
 public class ShowController 

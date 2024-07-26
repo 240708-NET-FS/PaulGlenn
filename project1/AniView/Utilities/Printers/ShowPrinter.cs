@@ -1,12 +1,13 @@
 using AniView.Entities;
-using AniView.Utilities;
+namespace AniView.Utilities.Printers;
+
 
 public class ShowPrinter : IPrinter<Show> {
     public static void Print(Show show ) {
 
         string nameString = $"{show.ShowID}. {show.Name}";
-        string lastEpisodeWatchedString = $"Episode {show.LastEpisodeWatched} of {show.Episodes}";
-        string dateLastWatchedString = $"Last watched on {show.DateLastWatched.Date}"; 
+        string lastEpisodeWatchedString = $"Ep. {show.LastEpisodeWatched} of {show.Episodes}";
+        string dateLastWatchedString = $"Last watched {show.DateLastWatched.Date}"; 
         string isFavorite = show.Favorite ? "Yes" : "No" ;
         string isAiring = show.isAiring ? "Yes" : "No"; 
 
@@ -20,6 +21,8 @@ public class ShowPrinter : IPrinter<Show> {
         System.Console.WriteLine($"Still Airing? {isAiring}");
         System.Console.WriteLine($"Favorited? {isFavorite}");
         System.Console.WriteLine(new string('-',maxLength));
+     
+       
     }
 
     }

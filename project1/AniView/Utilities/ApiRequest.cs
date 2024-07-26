@@ -1,4 +1,3 @@
-using AniView.Utilities;
 using Newtonsoft.Json; 
 namespace AniView.Utilities; 
 public class AnimeApiRequest {
