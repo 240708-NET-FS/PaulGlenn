@@ -1,8 +1,9 @@
 using AniView.Entities;
-namespace AniView.Utilities; 
-public class Printer {
+using AniView.Utilities;
 
-    public static void PrintShow(Show show ){
+public class ShowPrinter : IPrinter<Show> {
+    public static void Print(Show show ) {
+
         string nameString = $"{show.ShowID}. {show.Name}";
         string lastEpisodeWatchedString = $"Episode {show.LastEpisodeWatched} of {show.Episodes}";
         string dateLastWatchedString = $"Last watched on {show.DateLastWatched.Date}"; 
@@ -21,10 +22,4 @@ public class Printer {
         System.Console.WriteLine(new string('-',maxLength));
     }
 
-  public static void PrintAnimeList(Anime[] animeList) {
-      for ( int i = 0; i < animeList.Length; i++ ) 
-          {
-              Console.WriteLine($"{i+1}.  {animeList[i].ToString()}" );
-          }
-  }
-}
+    }

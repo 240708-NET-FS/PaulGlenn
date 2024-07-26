@@ -116,7 +116,7 @@ public class ShowController
     if ( animeList.Length > 0 ) 
     {
       Console.WriteLine("Found the following anime matches under that search: ");
-      Printer.PrintAnimeList(animeList); 
+      AnimeListPrinter.Print(animeList);
     } else {
       // nothing was found for them. Just exit after an apology 
       SorrySendoff() ; 
@@ -164,7 +164,7 @@ public class ShowController
         Console.WriteLine("Here is your current list of shows: ");
         for(int i = 0; i < shows.Count; i++ ) 
         {
-          Printer.PrintShow(shows.ElementAt(i));
+         ShowPrinter.Print(shows.ElementAt(i));
         }
 
         // prompt to make additional changes
@@ -187,7 +187,7 @@ public class ShowController
     // we will get show by ID 
     Show show = _showService.GetById(showChoice); 
     Console.WriteLine("Your selection: ");
-    Printer.PrintShow(show); 
+    ShowPrinter.Print(show); 
 
     // prompt user to choose what they want to do 
     Console.WriteLine("What would you like to do with this show?");
