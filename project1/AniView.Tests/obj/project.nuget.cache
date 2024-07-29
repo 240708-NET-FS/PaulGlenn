@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/xww5V+4Vao=",
+  "dgSpecHash": "BhqrHRnTFdw=",
   "success": true,
   "projectFilePath": "/Users/nls.pglenn/github/revature/PaulGlenn/project1/AniView.Tests/AniView.Tests.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "/Users/nls.pglenn/.nuget/packages/azure.identity/1.10.3/azure.identity.1.10.3.nupkg.sha512",
     "/Users/nls.pglenn/.nuget/packages/castle.core/5.1.1/castle.core.5.1.1.nupkg.sha512",
     "/Users/nls.pglenn/.nuget/packages/coverlet.collector/6.0.0/coverlet.collector.6.0.0.nupkg.sha512",
+    "/Users/nls.pglenn/.nuget/packages/dotenv.net/3.2.0/dotenv.net.3.2.0.nupkg.sha512",
     "/Users/nls.pglenn/.nuget/packages/microsoft.bcl.asyncinterfaces/1.1.1/microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "/Users/nls.pglenn/.nuget/packages/microsoft.codecoverage/17.8.0/microsoft.codecoverage.17.8.0.nupkg.sha512",
     "/Users/nls.pglenn/.nuget/packages/microsoft.csharp/4.5.0/microsoft.csharp.4.5.0.nupkg.sha512",

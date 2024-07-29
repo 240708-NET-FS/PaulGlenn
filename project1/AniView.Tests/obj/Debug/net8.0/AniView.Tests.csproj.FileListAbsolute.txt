@@ -161,3 +161,4 @@
 /Users/nls.pglenn/github/revature/PaulGlenn/project1/AniView.Tests/bin/Debug/net8.0/System.Diagnostics.EventLog.dll
 /Users/nls.pglenn/github/revature/PaulGlenn/project1/AniView.Tests/bin/Debug/net8.0/runtimes/win/lib/net6.0/System.Diagnostics.EventLog.Messages.dll
 /Users/nls.pglenn/github/revature/PaulGlenn/project1/AniView.Tests/bin/Debug/net8.0/runtimes/win/lib/net6.0/System.Diagnostics.EventLog.dll
+/Users/nls.pglenn/github/revature/PaulGlenn/project1/AniView.Tests/bin/Debug/net8.0/dotenv.net.dll

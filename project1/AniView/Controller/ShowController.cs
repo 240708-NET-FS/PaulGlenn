@@ -77,7 +77,6 @@ public class ShowController
 
   public bool PromptNewAnime() 
   {
-    Console.WriteLine("Enter the name of an anime you want to add to your list: ");
 
     string name =  InputRetriever.GetName();
 
@@ -138,7 +137,6 @@ public class ShowController
         bool isAdded = _showService.Create(_User,anime);
 
         if (isAdded) System.Console.WriteLine("Added!");
-        else System.Console.WriteLine("You have already added this show!");
         break; 
       default: 
         SorrySendoff(); 

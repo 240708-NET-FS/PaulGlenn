@@ -21,8 +21,8 @@ public class UserController(UserService service)
 
         while (!isLoggedIn)
         {
-             System.Console.WriteLine("Hello! Enter a username:");
-            _name = InputRetriever.GetName();
+            
+            _name = InputRetriever.GetUserName();
 
             User = GetExistingUser(); 
             if ( User == null ) 

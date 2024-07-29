@@ -4,6 +4,17 @@ public class InputRetriever {
       bool isValid = false; 
       string name = "" ; 
       while(!isValid) {
+        Console.WriteLine("Enter the name of an anime you want to add to your list: ");
+        name = Console.ReadLine() ?? "" ; 
+        isValid  = Validator.CheckNameIsValid(name); 
+        if(!isValid) System.Console.WriteLine("Invalid username! Can't start with a number. Try again.");
+      }
+      return name; 
+    }
+    public static string GetUserName() {
+      bool isValid = false; 
+      string name = "" ; 
+      while(!isValid) {
         System.Console.WriteLine("Enter username:");
         name = Console.ReadLine() ?? "" ; 
         isValid  = Validator.CheckNameIsValid(name); 

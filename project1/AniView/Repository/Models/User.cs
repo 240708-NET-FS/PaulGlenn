@@ -7,5 +7,7 @@ public class User {
 
     public string Passphrase {get; set; }
 
+    public string Salt {get; set;}
+
     public virtual ICollection<Show> Shows {get; set; }
 }

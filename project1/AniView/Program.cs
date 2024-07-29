@@ -2,9 +2,7 @@
 using AniView.Controller;
 using AniView.DAO;
 using AniView.Service;
-using AniView.Utilities; 
-//using Microsoft.EntityFrameworkCore;
-//using Microsoft.IdentityModel.Tokens;
+
 
 namespace AniView ;
 public class AniView
@@ -12,18 +10,6 @@ public class AniView
     static void Main(string[] args) 
     {
 
-        // get user name 
-      
-        // System.Console.WriteLine("Hello! What is your name?");
-        // string name = Console.ReadLine() ?? "" ; 
-        // while(!Validator.CheckNameIsValid(name)){
-        //     System.Console.WriteLine("That name is invalid. Try again (we will save this with your cats!)");
-        //     System.Console.WriteLine("Enter your name: ");
-        //     name = Console.ReadLine()  ?? "" ; 
-
-        // }
-
-        // this concludes the functionality for retrieving one cat. todo next week : add to favorites list which we can store in a database 
         using (var context = new ApplicationDbContext()) 
         {
             // get user 

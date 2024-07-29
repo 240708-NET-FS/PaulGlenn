@@ -26,38 +26,28 @@ public class UserService (UserDAO userDAO) : IService<User> {
 
     public void Create(User item)
     {
-        DotEnv.Load();
         // check that username and password --- ? 
         // check that username doesn't already exist 
 
         // here is where we will handle hashing passwords
-        string salt = Environment.GetEnvironmentVariable("SALT"); 
-        string inputString = salt + item.Passphrase + salt; 
-        byte[] data = System.Text.Encoding.ASCII.GetBytes(inputString);
-        data = System.Security.Cryptography.SHA256.HashData(data);
-        string hashPass = System.Text.Encoding.ASCII.GetString(data);
-        item.Passphrase = hashPass; 
-
+        item.Salt = DateTime.Now.ToString(); 
+        item.Passphrase = HashPass(item.Passphrase, item.Salt); 
         _userDAO.Create(item); 
     }
 
     public bool Authenticate(User user) {
         // if user doesn't exist, return false
         User? existingUser  = GetByName(user.UserName);  
+        
         if(existingUser == null) return false; 
-
+    
         // hash password for comparison 
-        DotEnv.Load() ; 
-
-        string salt = Environment.GetEnvironmentVariable("SALT"); 
-        string inputString = salt + user.Passphrase + salt; 
-        byte[] data = System.Text.Encoding.ASCII.GetBytes(inputString);
-        data = System.Security.Cryptography.SHA256.HashData(data);
-        string hashPass = System.Text.Encoding.ASCII.GetString(data);
+    
+        string hashed = HashPass(user.Passphrase,existingUser.Salt); 
         
 
-        //
-        return existingUser.Passphrase == hashPass; 
+        //return true if passwords match , false if not 
+        return existingUser.Passphrase == hashed; 
     }
 
     public void Delete(User item)
@@ -68,6 +58,18 @@ public class UserService (UserDAO userDAO) : IService<User> {
     public void Update(User item)
     {
         _userDAO.Update(item);
+    }
+
+    private static string HashPass(string str, string salt) {
+        DotEnv.Load() ; 
+
+        //string salt = Environment.GetEnvironmentVariable("SALT"); 
+        
+        string inputString = salt + salt + str + salt + salt; 
+        byte[] data = System.Text.Encoding.ASCII.GetBytes(inputString);
+        data = System.Security.Cryptography.SHA256.HashData(data);
+        string hashedData = System.Text.Encoding.ASCII.GetString(data);
+        return hashedData; 
     }
 
 }

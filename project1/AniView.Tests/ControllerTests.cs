@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+
 using AniView.Controller;
 using AniView.Entities;
 using AniView.Utilities;
@@ -13,7 +13,7 @@ public class AniViewTests_ControllerShould
         string mockName = "My Hero Academia"; 
         Console.SetIn(new StringReader(mockName));
 
-        ShowController showController = new() ; 
+        ShowController showController = new(new User(),null) ; 
         Anime[] animeList = await showController.GetShowList(mockName); 
        
         // Assert that the anime list has populated with something  

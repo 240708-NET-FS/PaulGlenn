@@ -36,7 +36,7 @@ public class ShowService(ShowDAO showDAO)
             System.Console.WriteLine("You've already added this show!");
             return false ; 
         }
-        System.Console.WriteLine($"What is the last episdoe you watched (enter 0 for none, out of {anime.episodes}): ");
+        System.Console.WriteLine($"What is the last episode you watched (enter 0 for none, out of {anime.episodes}): ");
         string lastEpisodeWatchedString = Console.ReadLine() ?? "0";
         int lastEpisodeWatched = Int32.Parse(lastEpisodeWatchedString);
 
