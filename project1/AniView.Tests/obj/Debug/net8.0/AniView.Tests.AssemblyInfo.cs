@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AniView.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+67a2f5cfe36d027de45615e991160bf56eed3b4b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+87cfc837f94c19b91d39dbda45a1d092e8287bf9")]
 [assembly: System.Reflection.AssemblyProductAttribute("AniView.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AniView.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

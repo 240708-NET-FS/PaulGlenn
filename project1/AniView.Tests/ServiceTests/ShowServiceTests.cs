@@ -52,7 +52,7 @@ public class ShowServiceTests {
     [Fact] 
     public void GetAllShows_Should_ReturnShowList() {
         // Arrange 
-        //Mock<DbSet<Show>> mockSet = new();
+     
         MockDbSet<Show> mockSet = new(animeList);
 
         Mock<ApplicationDbContext> mockContext = new();

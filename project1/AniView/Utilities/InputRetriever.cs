@@ -1,5 +1,17 @@
 namespace AniView.Utilities; 
 public class InputRetriever {
+
+
+  public static string GetYesNo(){
+    string answer = (Console.ReadLine() ?? " ").ToLower()  ; 
+    while( answer != "yes" && answer != "no") 
+    {
+      System.Console.WriteLine("Answer either 'yes' or 'no'!");
+      answer = (Console.ReadLine() ?? " ").ToLower() ; 
+    }
+    return answer; 
+
+  }
     public static string GetName() {
       bool isValid = false; 
       string name = "" ; 

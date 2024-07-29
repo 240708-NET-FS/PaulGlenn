@@ -55,7 +55,7 @@ public class UserController(UserService service)
             User unauthUser=  new() {UserName=_name, Passphrase=password};
             if(_userService.Authenticate(unauthUser)) return true;
             else {
-                Console.WriteLine("That username or password was incorrect. Enter 1 to try again or anything else to sign up instead. ");
+                Console.WriteLine("That username or password was incorrect. Enter 1 to try again or any other number to sign up instead. ");
                 int choice = InputRetriever.GetChoice();
                 if ( choice != 1) exitLoginLoop= true ; 
 

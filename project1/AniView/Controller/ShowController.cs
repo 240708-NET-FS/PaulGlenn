@@ -44,19 +44,19 @@ public class ShowController
             {
                 RunShowAppUI(); 
                 System.Console.WriteLine("Would you like to continue using the app?");
-                string response = Console.ReadLine() ?? "no"; 
+                string response = InputRetriever.GetYesNo(); 
                 if(!response.Equals("yes")) continuity = false; 
             }
   }
   public void RunShowAppUI() {
     string capitalizedName = string.Concat(_userName[0].ToString().ToUpper(), _userName.AsSpan(1));
     string prompt = ""; 
-    prompt += $"Hello {capitalizedName}! Welcome to AniView, the anime watch tracker app!\n";  
+    prompt += $"Hello {capitalizedName}! Welcome to AniView, the anime watch tracker app!\n \n";  
     prompt += "What would you like to do? \n " ;
-    prompt += "1. Add a new show \n " ; 
-    prompt += "2. Display all shows  (and possibly make changes) \n " ; 
+    prompt += "1. Add a new show \n \n " ; 
+    prompt += "2. Display all shows  (and possibly make changes) \n  \n" ; 
 
-
+    Console.Clear();
     Console.WriteLine(prompt);
     string choice = Console.ReadLine() ?? "";
     switch(choice) 
@@ -122,7 +122,7 @@ public class ShowController
     
     Console.WriteLine("Would you like to add one of these to your watchlist? (yes/no)");
 
-    string wantsToAdd = Console.ReadLine() ?? "" ; 
+    string wantsToAdd = InputRetriever.GetYesNo() ; 
     switch (wantsToAdd.ToLower()) 
     {
       case "yes": 
@@ -136,7 +136,7 @@ public class ShowController
         // next: add this to DB 
         bool isAdded = _showService.Create(_User,anime);
 
-        if (isAdded) System.Console.WriteLine("Added!");
+        if (isAdded) System.Console.WriteLine($"\n {anime.title_english ?? anime.title} has been added to your watchlist! \n ");
         break; 
       default: 
         SorrySendoff(); 
@@ -166,7 +166,7 @@ public class ShowController
 
         // prompt to make additional changes
         Console.WriteLine("Would you like to make changes? (yes/no)");
-        string answer = Console.ReadLine() ?? "no" ; 
+        string answer = InputRetriever.GetYesNo() ; 
         if(String.Equals(answer.ToLower(), "yes")) EditShow(); 
         break; 
 
@@ -183,6 +183,7 @@ public class ShowController
 
     // we will get show by ID 
     Show show = _showService.GetById(showChoice); 
+    Console.Clear();
     Console.WriteLine("Your selection: ");
     ShowPrinter.Print(show); 
 

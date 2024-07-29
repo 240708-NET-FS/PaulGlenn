@@ -23,6 +23,9 @@ public class MockDbSet<TEntity> : Mock<DbSet<TEntity>> where TEntity : class {
             data.Remove(arg); 
             return arg as EntityEntry<TEntity>; 
         });
+        // this.Setup(dbSet=>dbSet.ToList<TEntity>()).Returns(() => {
+        //     return data; 
+        // }); 
 
         // this.Setup(dbSet => dbSet.Update(It.IsAny<TEntity>() )).Returns((TEntity arg) => 
         // {

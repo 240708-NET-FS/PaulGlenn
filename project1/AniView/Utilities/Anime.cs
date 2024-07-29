@@ -13,5 +13,5 @@ public class Anime(string url, string title, string title_english, bool airing, 
         return "No"; 
     }
 
-    public override string ToString() => $" {this.title_english} \n URL : {this.url} \n Episodes: {this.episodes} \n Airing: {this.IsAiring() } \n --------------- \n ";
+    public override string ToString() => $" {this.title_english ?? this.title} \n URL : {this.url} \n Episodes: {this.episodes} \n Airing: {this.IsAiring() } \n --------------- \n ";
 }
